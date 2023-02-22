@@ -1,106 +1,130 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Week</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <script
-      src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script
-      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script>
-	$(document).ready(function() {
-  // Update chapter for all rows in the database
-		  $("#update-chapter-btn").click(function() {
-				var newChapter = $("#chapter-input").val();
-				var group = document.getElementsByTagName("td")[6].innerText;
-				$.ajax({
-				  type: "POST",
-				  url: "/update_data",
-				  contentType: "application/json; charset=utf-8",
-				  dataType: "json",
-				  data:JSON.stringify( {"chapter": newChapter,"group":group}),
-				  success: function() {
-					// Reload the page to show updated data
-						document.getElementById("myForm").submit();
-						console.log("salam")
 
-				  }
-				});
-				
-			setTimeout(function(){// wait for 5 secs(2)
-           location.reload(); // then reload the page.(3)
-      }, 2000); 
-			
-		  });
-  
-  
-  
-  
-});
+<head>
+  <title>Week</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      // Update juz for all rows in the database
+      $("#update-juz-btn").click(function () {
+        alert("درحال اضافه کردن به جز افراد ")
+        var new_juz = $("#juz-input").val();
+        var group = document.getElementsByTagName("td")[6].innerText;
+        $.ajax({
+          type: "POST",
+          url: "/update_data",
+          contentType: "application/json; charset=utf-8",
+          dataType: "json",
+          data: JSON.stringify({ "new_juz": new_juz, "group": group }),
+          success: function () {
+            // Reload the page to show updated data
+            location.reload();
+          },
+          error: function (jqXHR, textStatus, errorThrown) {
+            console.log(textStatus, errorThrown);
+          }
+        });
 
-	
-	</script>
-  </head>
-  <body>
-    <div class="container">
-      <h1>Week</h1>
-      <form id="myForm" action='@Url.Action(" Details"," Main", new { id=
-        @Model.ID } )'></form>
+      });
 
-      <div class="row mt-3">
-        <div class="col-md-3">
-          <input type="text" class="form-control" id="chapter-input"
-            placeholder="New Chapter" value ="1">
-        </div>
-        <div class="col-md-3">
-          <button class="btn btn-primary" id="update-chapter-btn">Update Chapter</button>
-        </div>
+    });
+  </script>
+
+<script>
+  // copy final to clipboard
+  function copyToClipboard() {
+    var final = document.getElementById('final');
+    var range = document.createRange();
+    range.selectNode(final);
+    window.getSelection().addRange(range);
+    document.execCommand('copy');
+    window.getSelection().removeAllRanges();
+    // alert('Data copied to clipboard!');
+    final.style.backgroundColor = "lightblue";
+  }
+</script>
+
+  <style>
+    span.pople {
+      display: block;
+      direction: rtl;
+      text-align: right;
+    }
+
+    div#final {
+    height: 80px;
+    overflow: hidden;
+}
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Week</h1>
+
+    <!-- row 1 -->
+    <div class="row mt-3">
+      <div class="col-md-3">
+        <input type="text" class="form-control" id="juz-input" placeholder="New juz" value="1">
       </div>
-
-
-
-
-      {% if rows %}
-
-
-
-      <div class="table-responsive">
-        <table class="table table-striped" id="data-grid">
-          <thead>
-            <tr>
-              <th>جنسیت</th>
-              <th>نام</th>
-              <th>فامیل</th>
-              <th>جز </th>
-              <th>تعداد صلوات</th>
-              <th>موبایل</th>
-              <th>Group</th>
-            </tr>
-          </thead>
-          <tbody id="data-grid-body">
-            {% for row in rows %}
-            <tr>
-              <td>{{ row[0] }}</td>
-              <td>{{ row[1] }}</td>
-              <td>{{ row[2] }}</td>
-              <td>{{ row[3] }}</td>
-              <td>{{ row[4] }}</td>
-              <td>{{ row[5] }}</td>
-              <td>{{ row[6] }}</td>
-            </tr>
-            {% endfor %}
-          </tbody>
-        </table>
+      <div class="col-md-3">
+        <button class="btn btn-primary" id="update-juz-btn">Update juz</button>
       </div>
-      {% elif selected_group %}
-      <p>No data available for group {{ selected_group }}</p>
-      {% endif %}
     </div>
 
 
-  </body>
+    {% if rows %}
+    <div class="table-responsive">
+      <table class="table table-striped" id="data-grid">
+        <thead>
+          <tr>
+            <th>جنسیت</th>
+            <th>نام</th>
+            <th>فامیل</th>
+            <th>جز </th>
+            <th>تعداد صلوات</th>
+            <th>موبایل</th>
+            <th>Group</th>
+          </tr>
+        </thead>
+        <tbody id="data-grid-body">
+          {% for row in rows %}
+          <tr>
+            <td>{{ row[0] }}</td>
+            <td>{{ row[1] }}</td>
+            <td>{{ row[2] }}</td>
+            <td>{{ row[3] }}</td>
+            <td>{{ row[4] }}</td>
+            <td>{{ row[5] }}</td>
+            <td>{{ row[6] }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% elif selected_group %}
+    <p>No data available for group {{ selected_group }}</p>
+    {% endif %}
+
+
+    <div class="row mt-3">
+      <div class="col-md-12 border" id="final" >
+        {% for row in rows %}
+        <span class="pople" id="pople_show">جزء {{ row[3] }} ) {{ row[0] }} {{ row[1] }} {{ row[2] }} - {{ row[4] }}
+          صلوات</span>
+        {% endfor %}
+      </div>
+      <button class="btn btn-success mt-3" onclick="copyToClipboard()">Copy Data</button>
+    </div>
+
+
+    <!-- end container -->
+  </div>
+</body>
+
 </html>
