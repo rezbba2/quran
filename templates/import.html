@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Week</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+  <div class="container">
+
+    <nav class="nav justify-content-center  m-5 ">
+      <a class="nav-link active" href="#" aria-current="page">Active link</a>
+      <a class="nav-link" href="#">Link</a>
+      <a class="nav-link disabled" href="#">Disabled link</a>
+    </nav>
+    
+    <!-- Import Data Form -->
+    <div class="row mt-3 border ">
+      <div class="col-md-12">
+        <form method="post" enctype="multipart/form-data" action="{{ url_for('import_data') }}">
+          <div class="form-group">
+            <label for="fileInput">Import Data (Excel file)</label>
+            <input type="file" class="form-control-file" id="fileInput" name="file">
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+    </div>
+
+
+
+    <div class="row justify-content-center align-items-center g-2">
+      <div class="col-md-12"
+        <div><h1>Download Excel Sample</h1></div>
+        <div><a href="{{ url_for('static', filename='quran_sample.xlsx') }}" download>Download Sample Excel File</a></div>
+      </div>
+    </div>
+
+
+
+
+
+
+    
+  </div>
+</body>
+
+</html>
