@@ -8,6 +8,8 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" ></script>
   <script>
     $(document).ready(function () {
       // Update juz for all rows in the database
@@ -49,6 +51,29 @@
   }
 </script>
 
+<script>
+  tinymce.init({
+    selector: 'textarea#editor',
+    skin: 'bootstrap',
+    plugins: 'lists, link, image, media, emoticons',
+    toolbar: 'emoticons h1 h2 bold italic strikethrough blockquote bullist numlist backcolor | link image media | removeformat help ',
+    menubar: false,
+  });
+
+  function hide() {
+  var x = document.getElementById("extra_description");
+
+  if (x.style.display === "none") {
+  x.style.display = "block";
+} else {
+  x.style.display = "none";
+}   
+}
+</script>
+
+
+
+
   <style>
     span.pople {
       display: block;
@@ -60,7 +85,19 @@
     height: 80px;
     overflow: hidden;
 }
+
+  /* one way */
+  .tox-notifications-container{
+        visibility: hidden;
+      }
+  /* another way */
+    .tox-notifications-container{
+        display: none;
+      }
+
   </style>
+
+
 </head>
 
 <body>
@@ -112,7 +149,41 @@
     {% endif %}
 
 
+        <!-- Start پر کردن بالا و پایین -->
+        <div class="container mt-4 mb-4">
+          <!--Bootstrap classes arrange web page components into columns and rows in a grid -->
+          <div class="row justify-content-md-center">
+            <button type="submit" class="btn btn-primary" onclick="hide()">پر کردن بالا و پایین
+            </button>
+    
+          </div>
+        </div>
+    
+        <div class="container mt-4 mb-4">
+          <!--Bootstrap classes arrange web page components into columns and rows in a grid -->
+          <div class="row justify-content-md-center">
+            
+            <div class="col-md-12 col-lg-8" id = "extra_description" style="display: none;" >
+              
+                  <label>بالا</label>
+                  <div class="form-group">
+                      <textarea id="editor"></textarea>
+                  </div>
+                  <label>پایین</label>
+                  <div class="form-group">
+                      <textarea id="editor"></textarea>
+                  </div>
+    
+                  
+              </div>
+          </div>
+        </div>
+        <!-- End پر کردن بالا و پایین -->
+
+    <!-- Start final show  -->
+    
     <div class="row mt-3">
+      <div id="up"></div>
       <div class="col-md-12 border" id="final" >
         {% for row in rows %}
         <span class="pople" id="pople_show">جزء {{ row[3] }} ) {{ row[0] }} {{ row[1] }} {{ row[2] }} - {{ row[4] }}
@@ -121,6 +192,7 @@
       </div>
       <button class="btn btn-success mt-3" onclick="copyToClipboard()">Copy Data</button>
     </div>
+    <!-- End final show  -->
 
 
     <!-- end container -->

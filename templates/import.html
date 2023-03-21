@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html >
 <html>
 
 <head>
@@ -8,6 +8,40 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" ></script>
+
+  <script>
+    tinymce.init({
+      selector: 'textarea#editor',
+      skin: 'bootstrap',
+      plugins: 'lists, link, image, media, emoticons',
+      toolbar: 'emoticons h1 h2 bold italic strikethrough blockquote bullist numlist backcolor | link image media | removeformat help ',
+      menubar: false,
+    });
+
+    function hide() {
+    var x = document.getElementById("extra_description");
+	
+	  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }   
+}
+  </script>
+
+<style>
+  /* one way */
+    .tox-notifications-container{
+        visibility: hidden;
+      }
+  /* another way */
+    .tox-notifications-container{
+        display: none;
+      }
+  </style>
+
 </head>
 
 <body>
@@ -37,16 +71,14 @@
     <div class="row justify-content-center align-items-center g-2">
       <div class="col-md-12"
         <div><h1>Download Excel Sample</h1></div>
-        <div><a href="{{ url_for('static', filename='quran_sample.xlsx') }}" download>Download Sample Excel File</a></div>
+        <div><a href="{{ url_for('static', filename='quran_sample.xlsx') }}" download>Download Sample   Excel File</a></div>
       </div>
     </div>
 
 
 
 
-
-
-    
+    <!-- end container -->
   </div>
 </body>
 

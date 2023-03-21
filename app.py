@@ -4,6 +4,15 @@ import sqlite3
 
 app = Flask(__name__, static_folder='static')
 
+
+@app.route('/v')
+def index_v():
+    return render_template('quran/land/index.html')
+def pri():
+    print("ddddd")
+
+
+
 @app.route('/')
 def index():
     # Connect to the database
@@ -29,7 +38,7 @@ def get_data():
     c = conn.cursor()
 
     # Retrieve the rows from the table that match the selected group
-    c.execute('SELECT * FROM quran WHERE groupe = ? ORDER BY juz DESC', (selected_group,))
+    c.execute('SELECT * FROM quran WHERE groupe = ? ORDER BY juz ASC', (selected_group,))
                 
     rows = c.fetchall()
 

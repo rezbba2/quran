@@ -1,3 +1,5 @@
 .guran/
+.qu/
 mydatabase.db
 create_table.py
+templates/quran/

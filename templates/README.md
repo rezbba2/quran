@@ -1,0 +1,2 @@
+install requirements
+run create_table
