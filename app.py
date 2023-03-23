@@ -67,6 +67,23 @@ def update_data():
     conn.close()
     return {'status':'success'}
 
+@app.route('/back_data', methods=['POST'])
+def back_data():
+    juz = request.json['back_juz']
+    groupe = request.json['group']
+    print (juz + "  "+groupe)
+    conn = sqlite3.connect('mydatabase.db')
+    c = conn.cursor()
+    query = f"UPDATE quran SET juz = juz - '{juz}'"
+    query2 = f"UPDATE quran SET juz =  30 WHERE juz < 1"  
+    
+    print (query)
+    c.execute(query)
+    c.execute(query2)
+    conn.commit()
+    conn.close()
+    return {'status':'success'}
+
     
 @app.route('/get_data/group', methods=['GET'])
 def get_data_group():

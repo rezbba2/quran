@@ -36,7 +36,33 @@
 
     });
   </script>
+  
+  <script>
+    $(document).ready(function () {
+      // Update juz for all rows in the database
+      $("#come-backcount-juz-btn").click(function () {
+        alert("درحال برگرداندن جز افراد ")
+        var back_juz = $("#juz-input").val();
+        var group = document.getElementsByTagName("td")[6].innerText;
+        $.ajax({
+          type: "POST",
+          url: "/back_data",
+          contentType: "application/json; charset=utf-8",
+          dataType: "json",
+          data: JSON.stringify({ "back_juz": back_juz, "group": group }),
+          success: function () {
+            // Reload the page to show updated data
+            location.reload();
+          },
+          error: function (jqXHR, textStatus, errorThrown) {
+            console.log(textStatus, errorThrown);
+          }
+        });
 
+      });
+
+    });
+  </script>  
 <script>
   // copy final to clipboard
   function copyToClipboard() {
@@ -111,6 +137,7 @@
       </div>
       <div class="col-md-3">
         <button class="btn btn-primary" id="update-juz-btn">Update juz</button>
+        <button class="btn btn-danger" id="come-backcount-juz-btn">Come back</button>
       </div>
     </div>
 
