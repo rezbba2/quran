@@ -10,10 +10,11 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
   <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" ></script>
+
   <script>
     $(document).ready(function () {
       // Update juz for all rows in the database
-      $("#update-juz-btn").click(function () {
+      $("#update-juz-btn").click(function update_data() {
         alert("درحال اضافه کردن به جز افراد ")
         var new_juz = $("#juz-input").val();
         var group = document.getElementsByTagName("td")[6].innerText;
@@ -40,7 +41,7 @@
   <script>
     $(document).ready(function () {
       // Update juz for all rows in the database
-      $("#come-backcount-juz-btn").click(function () {
+      $("#come-backcount-juz-btn").click(function back_data() {
         alert("درحال برگرداندن جز افراد ")
         var back_juz = $("#juz-input").val();
         var group = document.getElementsByTagName("td")[6].innerText;
@@ -133,11 +134,11 @@
     <!-- row 1 -->
     <div class="row mt-3">
       <div class="col-md-3">
-        <input type="text" class="form-control" id="juz-input" placeholder="New juz" value="1">
+        <input type="text" class="form-control" id="juz-input" placeholder="New juz" value='{{ selected_group }}'>
       </div>
       <div class="col-md-3">
-        <button class="btn btn-primary" id="update-juz-btn">Update juz</button>
-        <button class="btn btn-danger" id="come-backcount-juz-btn">Come back</button>
+        <button class="btn btn-primary" id="update-juz-btn" onclick="update_data()">Update juz</button>
+        <button class="btn btn-danger" id="come-backcount-juz-btn" onclick="back_data()">Come back</button>
       </div>
     </div>
 
@@ -153,7 +154,7 @@
             <th>جز </th>
             <th>تعداد صلوات</th>
             <th>موبایل</th>
-            <th>Group</th>
+            <th>گروه</th>
           </tr>
         </thead>
         <tbody id="data-grid-body">
