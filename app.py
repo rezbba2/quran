@@ -16,7 +16,7 @@ def pri():
 @app.route('/')
 def index():
     # Connect to the database
-    conn = sqlite3.connect('mydatabase.db')
+    conn = sqlite3.connect('storage/mydatabase.db')
     c = conn.cursor()
 
     # Retrieve the unique groups from the table
@@ -34,7 +34,7 @@ def get_data():
     # Retrieve the selected group from the dropdown
     selected_group = request.form['group']
     # Connect to the database
-    conn = sqlite3.connect('mydatabase.db')
+    conn = sqlite3.connect('storage/mydatabase.db')
     c = conn.cursor()
 
     # Retrieve the rows from the table that match the selected group
@@ -55,7 +55,7 @@ def update_data():
     juz = request.json['new_juz']
     groupe = request.json['group']
     print (juz + "  "+groupe)
-    conn = sqlite3.connect('mydatabase.db')
+    conn = sqlite3.connect('storage/mydatabase.db')
     c = conn.cursor()
     query = f"UPDATE quran SET juz = juz + '{juz}'"
     query2 = f"UPDATE quran SET juz =  1 WHERE juz > 30"  
@@ -72,7 +72,7 @@ def back_data():
     juz = request.json['back_juz']
     groupe = request.json['group']
     print (juz + "  "+groupe)
-    conn = sqlite3.connect('mydatabase.db')
+    conn = sqlite3.connect('storage/mydatabase.db')
     c = conn.cursor()
     query = f"UPDATE quran SET juz = juz - '{juz}'"
     query2 = f"UPDATE quran SET juz =  30 WHERE juz < 1"  
@@ -106,7 +106,7 @@ def import_data():
     file = request.files['file']
     if file.filename.endswith('.xlsx'):
         df = pd.read_excel(file, sheet_name="Sheet1")
-        conn = sqlite3.connect('mydatabase.db')
+        conn = sqlite3.connect('storage/mydatabase.db')
         c = conn.cursor()
         for index, row in df.iterrows():
             values = (row['Gender'], row['Name'], row['Family'], row['Juz'], row['Salavat'], row['Phone'], row['Groupe'])

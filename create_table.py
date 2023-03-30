@@ -2,7 +2,7 @@ import sqlite3
 
 
 def create_table():
-    conn = sqlite3.connect('mydatabase.db')
+    conn = sqlite3.connect('storage/mydatabase.db')
     c = conn.cursor()
     c.execute('''CREATE TABLE quran
                  (gender text, name text, family text, juz integer, salavat integer,phone CHAR(11) UNIQUE , groupe integer)''')
